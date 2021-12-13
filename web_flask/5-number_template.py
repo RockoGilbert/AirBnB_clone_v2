@@ -19,19 +19,19 @@ def hbnb():
 @app.route('/c/<text>', strict_slashes=False)
 def c_is_fun(text):
     """ Prints a Message when /c is called """
-    return 'C {:s}'.format(text.replace('_', ' '))
+    return 'C {}'.format(text.replace('_', ' '))
 
-
+@app.route('/python', strict_slashes=False)
 @app.route('/python/<text>', strict_slashes=False)
 def python_is_cool(text='is_cool'):
     """ Prints a Message when /python is called """
-    return 'Python {:s}'.format(text.replace('_', ' '), strict_slashes=False)
+    return 'Python {}'.format(text.replace('_', ' '), strict_slashes=False)
 
 
 @app.route('/number/<int:n>', strict_slashes=False)
 def number(n):
     """ Prints a Message when /number is called only if n is an int"""
-    return "{:d} is a number".format(n)
+    return "{} is a number".format(n)
 
 
 @app.route('/number_template/<int:n>', strict_slashes=False)
