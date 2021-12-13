@@ -24,7 +24,6 @@ if __name__ == '__main__':
         """Display “C ” route)"""
         return 'C ' + text.replace('_', ' ')
 
-
     @app.route('/python/<text>', strict_slashes=False)
     def python(text="is cool"):
         """Display “Python ” followed by the value of text)"""
