@@ -1,52 +1,57 @@
 #!/usr/bin/python3
-"""script that starts a Flask web application:"""
-from flask import Flask, render_template
+"""FLASK"""
+from flask import Flask
+from flask.templating import render_template
+
 app = Flask(__name__)
 
 
 @app.route('/', strict_slashes=False)
-def hello_hbnb():
-    """ Prints a Message when / is called """
+def hello():
+    """hello HBNB"""
     return 'Hello HBNB!'
 
 
 @app.route('/hbnb', strict_slashes=False)
-def hbnb():
-    """ Prints a Message when /hbnb is called """
+def hbnb_only():
+    """HBNB"""
     return 'HBNB'
 
 
 @app.route('/c/<text>', strict_slashes=False)
-def c(text):
-    """ Prints a Message when /c is called """
-    return "C " + text.replace('_', ' ')
+def c_route(text):
+    """c_route"""
+    return 'C {}' .format(text.replace("_", " "))
 
 
+@app.route('/python', strict_slashes=False)
 @app.route('/python/<text>', strict_slashes=False)
-def python_is_cool(text='is_cool'):
-    """ Prints a Message when /python is called """
-    return "Python " + text.replace('_', ' ')
+def python_route(text="is cool"):
+    """python_route"""
+    return "Python {}".format(text.replace("_", " "))
 
 
 @app.route('/number/<int:n>', strict_slashes=False)
 def number(n):
-    """ Prints a Message when /number is called only if n is an int"""
-    return "{} is a number".format(n)
+    if isinstance(n, int):
+        return "{} is a number".format(n)
 
 
 @app.route('/number_template/<int:n>', strict_slashes=False)
 def number_template(n):
-    """ display a HTML page only if n is an integer """
-    return render_template('5-number.html', n=n)
+    """number_template"""
+    if isinstance(n, int):
+        return render_template("5-number.html", n=n)
 
 
-@app.route('/number_odd_or_even/<n>', strict_slashes=False)
+@app.route('/number_odd_or_even/<int:n>', strict_slashes=False)
 def odd_even(n):
-    """Displays an html page if it is odd or even"""
-
-    parity = 'even' if n % 2 == 0 else 'odd'
-    return render_template('6-number_odd_or_even.html', n=n, parity=parity)
+    if n % 2 == 0:
+        oe = "even"
+    else:
+        oe = "odd"
+    return render_template("6-number_odd_or_even.html", n=n, oe=oe)
 
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port='5000')
