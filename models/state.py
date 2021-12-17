@@ -19,8 +19,6 @@ class State(BaseModel, Base):
         @property
         def cities(self):
             """getter for cities list when using filestorage"""
-            res = []
-            for thing in models.storage.all(City).values():
-                if thing.state_id == self.id:
-                    res.append(thing)
-            return res
+            from models import storage
+            return [city for city in storage.all(City).values()
+                    if city.state_id == self.id]
